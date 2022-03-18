@@ -30,4 +30,9 @@ public class test {
                 "str='" + str + '\'' +
                 '}';
     }
+
+    public String gitTest(){
+        return "git test";
+    }
+
 }
