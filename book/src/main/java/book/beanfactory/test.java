@@ -35,4 +35,7 @@ public class test {
         return "git test";
     }
 
+    public String masterModify(){
+        return "master modify";
+    }
 }
