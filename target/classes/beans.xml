@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    获取设置bean对象里面的属性-->
+<!--    <bean id = "cheysun" class="com.chey.dao.PersonDao">-->
+<!--        <property name="name" value="chey"/>-->
+<!--    </bean>-->
+<!--    <alias name="cheysun" alias="chey"/>-->
+<!--    <bean id="animalDao" class="com.chey.dao.AnimalDao" scope="singleton"/>-->
+<!--    <bean id="person" class="com.chey.dao.PersonDao" autowire="byType"/>-->
+<!--    <bean id="gougou" class="com.chey.dao.AnimalDao" name="xiaogou gou,xiaogougou;dog">-->
+<!--        <property name="sex" value="male"/>-->
+<!--    </bean>-->
+
+
+</beans>

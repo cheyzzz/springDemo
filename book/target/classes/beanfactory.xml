@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  静态工厂方法   -->
+    <!--  带参 先创建实现类参数对象-->
+    <!--  再创建实例化方法返回的对象factory 值为getInstance方法返回的值 用构造器注入传递参数-->
+    <!--  最后创建Foo类型对象foo setter注入为foo对象的属性foointerface赋值为factory-->
+
+    <!--    <bean id="fooxx" class="book.beanfactory.factorymethod.Fooxx" />-->
+    <!--    <bean id="factory_parm" class="book.beanfactory.factorymethod.StaticFactory" factory-method="getInstance">-->
+    <!--        <constructor-arg>-->
+    <!--            <ref bean="fooxx"/>-->
+    <!--        </constructor-arg>-->
+    <!--    </bean>-->
+    <!--    <bean id="foo" class="book.beanfactory.factorymethod.Foo">-->
+    <!--        <property name="fooInterface">-->
+    <!--            <ref bean="factory_parm"/>-->
+    <!--        </property>-->
+    <!--    </bean>-->
+
+        <!--    相当于
+            fooxx=new Fooxx()
+            factory_parm=StaticFactory.getInstance(fooxx) 静态直接获取接口对象
+            foo=new Foo();
+            Foo.setFooInterface(factory_parm)-->
+
+
+    <!--    无参 直接创建实例化方法返回的对象factory 值为getInstance方法返回的值-->
+    <!--    再创建Foo类型对象foo setter注入为foo对象的属性foointerface赋值为factory-->
+
+    <!--    <bean id="factory" class="book.beanfactory.factorymethod.StaticFactory" factory-method="getInstance"/>-->
+    <!--    <bean id="foo" class="book.beanfactory.factorymethod.Foo">-->
+    <!--        <property name="fooInterface">-->
+    <!--            <ref bean="factory"/>-->
+    <!--        </property>-->
+    <!--    </bean>-->
+
+        <!--    相当于
+            factory=StaticFactory.getInstance()  静态直接获取接口对象
+            foo=new Foo();
+            Foo.setFooInterface(factory)-->
+
+
+<!--    非静态方法-->
+    <!--    带参 创建实现类参数对象 -->
+    <!--    创建NoStaticFactory类型对象noStaticFactory-->
+    <!--    构造器注入fooxx创建实例化方法返回的对象factory_parm-->
+    <!--    最后创建Foo类型对象foo setter注入为foo对象的属性foointerface赋值为factory_parm-->
+    <!--    <bean id="fooxx" class="book.beanfactory.factorymethod.Fooxx" />-->
+    <!--    <bean id="noStaticFactory" class="book.beanfactory.factorymethod.NoStaticFactory"/>-->
+    <!--    <bean id="factory_parm" factory-bean="noStaticFactory" factory-method="getInstance">-->
+    <!--        <constructor-arg>-->
+    <!--            <ref bean="fooxx"/>-->
+    <!--        </constructor-arg>-->
+    <!--    </bean>-->
+    <!--    <bean id="foo" class="book.beanfactory.factorymethod.Foo">-->
+    <!--        <property name="fooInterface">-->
+    <!--            <ref bean="factory_parm"/>-->
+    <!--        </property>-->
+    <!--    </bean>-->
+
+    <!--    相当于
+            fooxx=new Fooxx()
+            noStaticFactory=new NoStaticFactory()       非静态 要先创建对象
+            factory_parm=noStaticFactory.getInstance(fooxx)    再执行方法获取接口对象
+            foo=new Foo();
+            Foo.setFooInterface(factory)-->
+
+    <!--    无参 创建NoStaticFactory类型对象noStaticFactory -->
+    <!--    创建实例化方法返回的对象-->
+    <!--    创建Foo类型对象foo setter注入为foo对象的属性foointerface赋值为factory-->
+
+    <!--    <bean id="noStaticFactory" class="book.beanfactory.factorymethod.NoStaticFactory"/>-->
+    <!--    <bean id="factory" factory-bean="noStaticFactory" factory-method="getInstance"/>-->
+    <!--    <bean id="foo" class="book.beanfactory.factorymethod.Foo">-->
+    <!--        <property name="fooInterface">-->
+    <!--            <ref bean="factory"/>-->
+    <!--        </property>-->
+    <!--    </bean>-->
+
+        <!--    相当于
+            noStaticFactory=new NoStaticFactory()  非静态 要先创建对象
+            factory=noStaticFactory.getInstance()    再执行方法获取接口对象
+            foo=new Foo();
+            Foo.setFooInterface(factory)-->
+
+
+<!--spring自带factorybean-->
+<!--    创建SpringBeanFactory类型factory对象  并setter注入到业务对象foo中-->
+<!--    <bean id="factory" class="book.beanfactory.factorymethod.SpringBeanFactory"/>-->
+<!--    <bean id="foo" class="book.beanfactory.factorymethod.Foo">-->
+<!--        <property name="fooInterface">-->
+<!--            <ref bean="factory"/>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--prototype-->
+<!--    <bean id="bean" class="book.beanfactory.strengthcode.FXNewsBean" scope="prototype"/>-->
+<!--    <bean id="mockpersister" class="book.beanfactory.strengthcode.MockNewsPersister">-->
+<!--        <property name="newsBean">-->
+<!--            <ref bean="bean"/>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--    方法注入-->
+<!--    <bean id="bean" class="book.beanfactory.strengthcode.FXNewsBean" scope="prototype"/>-->
+<!--    <bean id="mockpersister" class="book.beanfactory.strengthcode.MockNewsPersister">-->
+<!--        <lookup-method name="getNewsBean" bean="bean"/>-->
+<!--    </bean>-->
+
+<!--使用BeanFactoryAware接口-->
+<!--    <bean id="bean" class="book.beanfactory.strengthcode.FXNewsBean" scope="prototype"/>-->
+<!--    <bean id="mockpersisterbeanfactory" class="book.beanfactory.factorymethod.MockNewsPersisterBeanFactory"/>-->
+
+<!--使用ObjectFactory-->
+<!--    <bean id="bean" class="book.beanfactory.strengthcode.FXNewsBean" scope="prototype"/>-->
+<!--    <bean id="factory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">-->
+<!--        <property name="targetBeanName">-->
+<!--            <idref bean="bean"/>-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    <bean id="mockpersisterbeanfactory" class="book.beanfactory.factorymethod.MockNewsPersisterObjectFactory">-->
+<!--        <property name="newsBeanFactory">-->
+<!--            <ref bean="factory"/>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--方法替换-->
+<!--    <bean id="djListener" class="book.beanfactory.strengthcode.DowJonesNewsListener"/>-->
+<!--    <bean id="djPersister" class="book.beanfactory.strengthcode.DowJonesNewsPersister"/>-->
+
+<!--    <bean id="providerReplacer" class="book.beanfactory.factorymethod.ProviderMethodReplacer"/>-->
+
+<!--    <bean id="djNewsProvider" class="book.beanfactory.strengthcode.FXNewsProvider">-->
+<!--        <constructor-arg index="0">-->
+<!--            <ref bean="djListener"/>-->
+<!--        </constructor-arg>-->
+<!--        <constructor-arg index="1">-->
+<!--            <ref bean="djPersister"/>-->
+<!--        </constructor-arg>-->
+<!--        <replaced-method name="getAndPersistNews" replacer="providerReplacer">-->
+<!--&lt;!&ndash;            <arg-type match="Integer"/>&ndash;&gt;-->
+<!--        </replaced-method>-->
+<!--    </bean>-->
+
+<!--    使用BeanFactoryPostProcessor-->
+<!--    <bean id="test" class="book.beanfactory.test">-->
+<!--        <property name="str">-->
+<!--            <value>${prop.string}</value>-->
+<!--&lt;!&ndash;            <value>"aaaa"</value>&ndash;&gt;-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    通过ApplicationContext使用BeanFactoryPostProcessor-->
+<!--    用PropertyPlaceholderConfigurer-->
+<!--    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+<!--        <property name="locations">-->
+<!--            <list>-->
+<!--                <value>prop.properties</value>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--    用PropertyOverrideConfigurer-->
+<!--    <bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">-->
+<!--        <property name="location" value="prop.properties"/>-->
+<!--    </bean>-->
+
+<!--实例化date-->
+
+<!--    使用CustomEditorConfigurer注册自定义DatePropertyEditor到容器-->
+    <bean id="datePropertyEditor" class="book.beanfactory.factorymethod.DatePropertyEditor">
+        <property name="datePattern">
+            <value>yyyy/MM/dd</value>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="java.util.Date" value="book.beanfactory.factorymethod.DatePropertyEditor"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="test2" class="book.beanfactory.test2">
+        <property name="date">
+            <value>2021/10/14</value>
+        </property>
+    </bean>
+
+</beans>

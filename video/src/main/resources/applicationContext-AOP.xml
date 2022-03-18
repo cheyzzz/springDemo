@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userservice" class="com.aop.service.UserServiceImpl"/>
+    <bean id="logAfter" class="com.aop.log.LogAfter"/>
+    <bean id="logBefore" class="com.aop.log.LogBefore"/>
+    <bean id="diy" class="com.aop.diy.DiyPointCut"/>
+    <bean id="annotation" class="com.aop.diy.AnnotationPointCut"/>
+
+<!--    <aop:config>-->
+<!--    法一 用API  用新建的实现类切入-->
+<!--    切入点 可多个  execution(* 类路径.*(..)) 类包括的方法     -->
+<!--        <aop:pointcut id="printcut" expression="execution(* com.aop.service.UserServiceImpl.*(..))"/>-->
+<!--        执行环绕增加-->
+<!--        <aop:advisor advice-ref="logAfter" pointcut-ref="printcut"/>-->
+<!--        <aop:advisor advice-ref="logBefore" pointcut-ref="printcut"/>-->
+
+<!--    法二 自定义切面方法切入-->
+<!--        <aop:aspect ref="diy">-->
+<!--            <aop:pointcut id="point" expression="execution(* com.aop.service.UserServiceImpl.*(..))"/>-->
+<!--            <aop:before method="before" pointcut-ref="point"/>-->
+<!--            <aop:after method="after" pointcut-ref="point"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+<!--    法三 注解-->
+    <aop:aspectj-autoproxy/>
+</beans>
