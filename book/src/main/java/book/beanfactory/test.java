@@ -35,4 +35,8 @@ public class test {
         return "git test";
     }
 
+    public String branchModify(){
+        return "modify1";
+    }
+
 }
