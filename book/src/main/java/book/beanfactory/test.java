@@ -35,6 +35,10 @@ public class test {
         return "git test";
     }
 
+    public String branchModify(){
+        return "modify1";
+    }
+
     public String masterModify(){
         return "master modify";
     }
